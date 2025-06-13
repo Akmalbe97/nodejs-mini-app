@@ -1,0 +1,20 @@
+{
+  "name": "weather-cli",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Akmal",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "chalk": "^5.4.1",
+    "deden": "^1.0.1",
+    "dedent-js": "^1.0.1",
+    "nodemon": "^3.1.10"
+  }
+}
