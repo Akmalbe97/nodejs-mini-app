@@ -4,9 +4,9 @@ import { printError, printSuccess, printHelp } from "./services/log.service.js";
 import { saveKeyValue, TOKEN_DICTIONARY } from "./storage.service.js";
 
 const saveToken = async (token) => {
-  if(!token.length) {
-    printError("Token not found")
-    return
+  if (!token.length) {
+    printError("Token not found");
+    return;
   }
   try {
     await saveKeyValue(TOKEN_DICTIONARY.token, token);
@@ -16,6 +16,20 @@ const saveToken = async (token) => {
   }
 };
 
+const getForcast = async () => {
+  try {
+    const response = await getWeather(process.env.CITY ?? "Uzbekistan");
+    console.log(response);
+  } catch (error) {
+    if (error?.response?.status == 404) {
+      printError("City not found");
+    } else if (error?.response?.status == 401) {
+      printError("Invalid token");
+    } else {
+      printError(error.message);
+    }
+  }
+};
 const startCLI = () => {
   const args = getArgs(process.argv);
   if (args.h) {
@@ -30,7 +44,7 @@ const startCLI = () => {
     //save token
     return saveToken(args.t);
   }
-  getWeather('Uzbekistan')
+  getForcast();
 };
 
 startCLI();

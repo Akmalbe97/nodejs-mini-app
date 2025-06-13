@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getKeyValue, TOKEN_DICTIONARY } from "../storage.service.js";
 const getWeather = async (city) => {
-  const token = await getKeyValue(TOKEN_DICTIONARY.token);
+  const token = await getKeyValue(process.env.TOKEN ?? TOKEN_DICTIONARY.token);
   if (!token) {
     throw new Error("API doesn't exist");
   }
@@ -18,7 +18,7 @@ const getWeather = async (city) => {
     }
   );
 
-  console.log(data);
+  return data
 };
 
 export { getWeather };
